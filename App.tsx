@@ -1,7 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 import { Calendar } from "react-native-calendars";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
 import { colors } from "./colors";
 import { useEffect, useState } from "react";
 import { MarkedDates } from "react-native-calendars/src/types";
@@ -47,23 +47,27 @@ export default function App() {
   }, []);
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.background}>
-        <View style={styles.header}>
-          <Text style={styles.headerText}>Payout Calendar</Text>
+    <SafeAreaProvider>
+      <SafeAreaView style={styles.container}>
+        <View style={styles.background}>
+          <View style={styles.header}>
+            <Text style={styles.headerText}>Payout Calendar</Text>
+          </View>
+          <Calendar
+            style={styles.calendar}
+            theme={{
+              arrowColor: colors.primary,
+              todayTextColor: colors.primary,
+            }}
+            markedDates={markedDates}
+            onMonthChange={(date) =>
+              calculateMarkedDates(date.month, date.year)
+            }
+          />
         </View>
-        <Calendar
-          style={styles.calendar}
-          theme={{
-            arrowColor: colors.primary,
-            todayTextColor: colors.primary,
-          }}
-          markedDates={markedDates}
-          onMonthChange={(date) => calculateMarkedDates(date.month, date.year)}
-        />
-      </View>
-      <StatusBar style="auto" />
-    </SafeAreaView>
+        <StatusBar style="auto" />
+      </SafeAreaView>
+    </SafeAreaProvider>
   );
 }
 
