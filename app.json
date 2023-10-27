@@ -2,7 +2,7 @@
   "expo": {
     "name": "Payout Calendar",
     "slug": "payout-calendar",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -19,10 +19,16 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#1a103c"
-      }
+      },
+      "package": "com.danidandev.payoutcalendar"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "e385da40-fd2a-4b66-92e8-51bb3f43acfe"
+      }
     }
   }
 }

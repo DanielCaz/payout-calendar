@@ -32,10 +32,22 @@ export default function App() {
     }
 
     let markedDates: MarkedDates = {};
-    const options = { selected: true, selectedColor: colors.primary };
+    const options = { selected: true };
 
-    markedDates[dateToString(firstTargetDate)] = options;
-    markedDates[dateToString(secondTargetDate)] = options;
+    markedDates[dateToString(firstTargetDate)] = {
+      ...options,
+      selectedColor:
+        new Date().getDate() === firstTargetDate.getDate()
+          ? colors.secondary
+          : colors.primary,
+    };
+    markedDates[dateToString(secondTargetDate)] = {
+      ...options,
+      selectedColor:
+        new Date().getDate() === secondTargetDate.getDate()
+          ? colors.secondary
+          : colors.primary,
+    };
 
     setMarkedDates(markedDates);
   };
@@ -57,7 +69,7 @@ export default function App() {
             style={styles.calendar}
             theme={{
               arrowColor: colors.primary,
-              todayTextColor: colors.primary,
+              todayTextColor: colors.secondary,
             }}
             markedDates={markedDates}
             onMonthChange={(date) =>
@@ -65,8 +77,8 @@ export default function App() {
             }
           />
         </View>
-        <StatusBar style="auto" />
       </SafeAreaView>
+      <StatusBar style="dark" />
     </SafeAreaProvider>
   );
 }
